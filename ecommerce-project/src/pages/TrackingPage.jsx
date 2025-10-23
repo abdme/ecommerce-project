@@ -1,7 +1,9 @@
+import Header from "../components/Header";
 import "./TrackingPage.css";
 export default function Tracking() {
   return (
     <>
+      <Header />
       <title>Tracking</title>
       <div className="header">
         <div className="left-section">

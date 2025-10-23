@@ -1,7 +1,9 @@
+import Header from "../components/Header";
 import "./OrdersPage.css";
 export default function Orders() {
   return (
     <>
+      <Header />
       <title>Orders</title>
       <div className="header">
         <div className="left-section">
