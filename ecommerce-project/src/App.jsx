@@ -1,5 +1,6 @@
 //import { useState } from "react";
 import HomePage from "./pages/HomePage";
+import CheckoutPage from "./pages/CheckoutPage";
 import { Routes, Route } from "react-router";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -9,7 +10,7 @@ function App() {
   return (
     <Routes>
       <Route index element={<HomePage />}></Route>
-      <Route path="checkout" element={<div>Test Checkout Path</div>} />
+      <Route path="checkout" element={<CheckoutPage />} />
     </Routes>
   );
 }
