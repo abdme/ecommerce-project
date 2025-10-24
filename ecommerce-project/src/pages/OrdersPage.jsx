@@ -1,15 +1,20 @@
 import Header from "../components/Header";
 import "./OrdersPage.css";
+import logoWhite from "../assets/images/logo-white.png";
+import searchIcon from "../assets/images/icons/search-icon.png";
+import cartIcon from "../assets/images/icons/cart-icon.png";
+import buyAgain from "../assets/images/icons/buy-again.png";
 export default function Orders() {
   return (
     <>
       <Header />
+      <link rel="icon" type="image/svg+xml" href="orders-favicon.png" />
       <title>Orders</title>
       <div className="header">
         <div className="left-section">
           <a href="/" className="header-link">
             <img className="logo" src="images/logo-white.png" />
-            <img className="mobile-logo" src="images/mobile-logo-white.png" />
+            <img className="mobile-logo" src={logoWhite} />
           </a>
         </div>
 
@@ -17,7 +22,7 @@ export default function Orders() {
           <input className="search-bar" type="text" placeholder="Search" />
 
           <button className="search-button">
-            <img className="search-icon" src="images/icons/search-icon.png" />
+            <img className="search-icon" src={searchIcon} />
           </button>
         </div>
 
@@ -27,7 +32,7 @@ export default function Orders() {
           </a>
 
           <a className="cart-link header-link" href="/checkout">
-            <img className="cart-icon" src="images/icons/cart-icon.png" />
+            <img className="cart-icon" src={cartIcon} />
             <div className="cart-quantity">3</div>
             <div className="cart-text">Cart</div>
           </a>
@@ -71,10 +76,7 @@ export default function Orders() {
                 </div>
                 <div className="product-quantity">Quantity: 1</div>
                 <button className="buy-again-button button-primary">
-                  <img
-                    className="buy-again-icon"
-                    src="images/icons/buy-again.png"
-                  />
+                  <img className="buy-again-icon" src={buyAgain} />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
@@ -100,10 +102,7 @@ export default function Orders() {
                 </div>
                 <div className="product-quantity">Quantity: 2</div>
                 <button className="buy-again-button button-primary">
-                  <img
-                    className="buy-again-icon"
-                    src="images/icons/buy-again.png"
-                  />
+                  <img className="buy-again-icon" src={buyAgain} />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>
@@ -149,10 +148,7 @@ export default function Orders() {
                 </div>
                 <div className="product-quantity">Quantity: 2</div>
                 <button className="buy-again-button button-primary">
-                  <img
-                    className="buy-again-icon"
-                    src="images/icons/buy-again.png"
-                  />
+                  <img className="buy-again-icon" src={buyAgain} />
                   <span className="buy-again-message">Add to Cart</span>
                 </button>
               </div>

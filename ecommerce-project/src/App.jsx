@@ -1,6 +1,6 @@
 //import { useState } from "react";
 import HomePage from "./pages/HomePage";
-import CheckoutPage from "./pages/CheckoutPage";
+import CheckoutPage from "./pages/Checkout/CheckoutPage";
 import Orders from "./pages/OrdersPage";
 import Tracking from "./pages/TrackingPage";
 import { Routes, Route } from "react-router";
@@ -15,6 +15,7 @@ function App() {
       <Route path="checkout" element={<CheckoutPage />} />
       <Route path="orders" element={<Orders />} />
       <Route path="tracking" element={<Tracking />} />
+      <Route path="*" element={<div>404 Page Not Found!!</div>} />
     </Routes>
   );
 }
