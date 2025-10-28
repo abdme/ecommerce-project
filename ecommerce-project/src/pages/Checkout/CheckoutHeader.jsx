@@ -3,7 +3,11 @@ import "./CheckoutHeader.css";
 import logo from "../../assets/images/logo.png";
 import mobileLogo from "../../assets/images/mobile-logo.png";
 import checkoutLockIcon from "../../assets/images/icons/checkout-lock-icon.png";
-export default function CheckoutHeader() {
+export default function CheckoutHeader({ cart }) {
+  let totalCartQuantity = 0;
+  cart.forEach((cartItem) => {
+    totalCartQuantity += cartItem.quantity;
+  });
   return (
     <>
       <div className="checkout-header">
@@ -18,7 +22,7 @@ export default function CheckoutHeader() {
           <div className="checkout-header-middle-section">
             Checkout (
             <Link className="return-to-home-link" to="/">
-              3 items
+              {totalCartQuantity} items
             </Link>
             )
           </div>

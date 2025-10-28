@@ -4,17 +4,7 @@ import Header from "../components/Header";
 // import { products } from "../../starting-code/data/products";
 import axios from "axios";
 
-export default function HomePage() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  useEffect(() => {
-    axios.get("api/products").then((response) => {
-      setProducts(response.data);
-    });
-    axios.get("api/cart-items").then((response) => {
-      setCart(response.data);
-    });
-  }, []);
+export default function HomePage({ cart, products }) {
   return (
     <>
       <Header cart={cart} />
