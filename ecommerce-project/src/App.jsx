@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    axios.get("api/cart-items?expand=productBut ").then((response) => {
+    axios.get("api/cart-items?expand=productBut").then((response) => {
       setCart(response.data);
     });
   }, []);
