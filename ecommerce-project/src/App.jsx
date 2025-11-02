@@ -33,7 +33,10 @@ function App() {
         path="checkout"
         element={<CheckoutPage cart={cart} products={products} />}
       />
-      <Route path="orders" element={<Orders />} />
+      <Route
+        path="orders"
+        element={<Orders cart={cart} products={products} />}
+      />
       <Route path="tracking" element={<Tracking />} />
       <Route path="*" element={<div>404 Page Not Found!!</div>} />
     </Routes>

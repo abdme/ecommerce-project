@@ -9,6 +9,7 @@ export default function Header({ cart }) {
   cart.forEach((cartItem) => {
     totalCartQuantity += cartItem.quantity;
   });
+
   return (
     <>
       <div className="header">

@@ -17,7 +17,6 @@ export default function CheckoutPage({ cart, products }) {
       setPaymentSummary(response.data);
     });
   }, []);
-  function onChangeDeliveryOption(optionID, itemID) {}
   function deliveryPrice(amountCents) {
     let price = "FREE SHIPPING";
     if (amountCents != 0) {
@@ -92,10 +91,7 @@ export default function CheckoutPage({ cart, products }) {
                             <div key={option.id} className="delivery-option">
                               <input
                                 type="radio"
-                                onChange={onChangeDeliveryOption(
-                                  option.id,
-                                  item.id
-                                )}
+                                readOnly
                                 checked={option.id === item.deliveryOptionId}
                                 className="delivery-option-input"
                                 name={`delivery-option-${currentProduct.id}`}
