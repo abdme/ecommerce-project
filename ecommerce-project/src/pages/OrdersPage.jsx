@@ -11,9 +11,11 @@ import buyAgain from "../assets/images/icons/buy-again.png";
 export default function Orders({ cart, products }) {
   const [orders, setOrders] = useState(null);
   useEffect(() => {
-    axios.get("/api/orders?expand=products").then((response) => {
+    const fetchOrders = async () => {
+      let response = await axios.get("/api/orders?expand=products");
       setOrders(response.data);
-    });
+    };
+    fetchOrders();
   });
   return (
     <>

@@ -13,15 +13,19 @@ function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   useEffect(() => {
-    axios.get("api/products").then((response) => {
+    const fetchProducts = async () => {
+      let response = await axios.get("api/products");
       setProducts(response.data);
-    });
+    };
+    fetchProducts();
   }, []);
 
   useEffect(() => {
-    axios.get("api/cart-items?expand=productBut").then((response) => {
+    const fetchCart = async () => {
+      let response = await axios.get("api/cart-items?expand=productBut");
       setCart(response.data);
-    });
+    };
+    fetchCart();
   }, []);
   return (
     <Routes>

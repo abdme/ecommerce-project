@@ -1,8 +1,6 @@
 import "./HomePage.css";
-import { useEffect, useState } from "react";
 import Header from "../components/Header";
 // import { products } from "../../starting-code/data/products";
-import axios from "axios";
 
 export default function HomePage({ cart, products }) {
   return (
