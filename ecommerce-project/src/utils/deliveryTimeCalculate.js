@@ -8,6 +8,7 @@ export function deliveryTimeCalculations(estimatedDeliveryTimeMs, orderTimeMs) {
   timeCalculations.totalDeliveryTimeMs = estimatedDeliveryTimeMs - orderTimeMs;
   timeCalculations.timePassedMs = dayjs().valueOf() - orderTimeMs;
   timeCalculations.deliveryProgressPercent =
-    timeCalculations.timePassedMs / timeCalculations.totalDeliveryTimeMs / 100;
+    (timeCalculations.timePassedMs / timeCalculations.totalDeliveryTimeMs) *
+    100;
   return timeCalculations;
 }

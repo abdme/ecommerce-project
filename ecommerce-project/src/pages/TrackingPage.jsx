@@ -28,6 +28,7 @@ export default function Tracking({ cart, products }) {
         cartQuantity += item.quantity;
       });
   }
+
   return (
     <>
       <Header cart={cart} />
@@ -70,6 +71,10 @@ export default function Tracking({ cart, products }) {
 
           {currentOrder &&
             currentOrder.products.map((item) => {
+              // const timeCalculations = deliveryTimeCalculations(
+              //   item.estimatedDeliveryTimeMs,
+              //   currentOrder.orderTimeMs
+              // );
               if (products.length === 0) {
                 return <p>Loading the Products....</p>;
               }
@@ -96,10 +101,7 @@ export default function Tracking({ cart, products }) {
                 )
               );
             })}
-          {deliveryTimeCalculations(
-            currentOrder.estimatedDeliveryTimeMs,
-            currentOrder.orderTimeMs
-          )}
+
           <div className="progress-labels-container">
             <div className="progress-label">Preparing</div>
             <div className="progress-label current-status">Shipped</div>
