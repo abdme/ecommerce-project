@@ -18,14 +18,21 @@ function App() {
       setProducts(response.data);
     };
     fetchProducts();
-  }, []);
 
-  useEffect(() => {
     const fetchCart = async () => {
       let response = await axios.get("api/cart-items?expand=productBut");
       setCart(response.data);
     };
     fetchCart();
+
+    // axios.get("api/products").then((response) => {
+    //   console.log(response);
+    //   setProducts(response.data);
+    // });
+    // axios.get("api/cart-items?expand=productBut").then((response) => {
+    //   console.log(response);
+    //   setCart(response.data);
+    // });
   }, []);
   return (
     <Routes>
@@ -41,7 +48,10 @@ function App() {
         path="orders"
         element={<Orders cart={cart} products={products} />}
       />
-      <Route path="tracking" element={<Tracking />} />
+      <Route
+        path="tracking/:orderId/:productId"
+        element={<Tracking cart={cart} products={products} />}
+      />
       <Route path="*" element={<div>404 Page Not Found!!</div>} />
     </Routes>
   );

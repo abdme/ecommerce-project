@@ -3,6 +3,7 @@ import "./CheckoutHeader.css";
 import logo from "../../assets/images/logo.png";
 import mobileLogo from "../../assets/images/mobile-logo.png";
 import checkoutLockIcon from "../../assets/images/icons/checkout-lock-icon.png";
+
 export default function CheckoutHeader({ cart }) {
   let totalCartQuantity = 0;
   cart.forEach((cartItem) => {

@@ -1,14 +1,36 @@
 import Header from "../components/Header";
 import { Link } from "react-router";
+import { useState, useEffect, Fragment } from "react";
+import axios from "axios";
+import dayjs from "dayjs";
 import "./TrackingPage.css";
 import logoWhite from "../assets/images/logo-white.png";
 import mobileLogoWhite from "../assets/images/mobile-logo-white.png";
+import { deliveryTimeCalculations } from "../utils/deliveryTimeCalculate";
+import { useParams } from "react-router";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
-export default function Tracking() {
+export default function Tracking({ cart, products }) {
+  const [currentOrder, setCurrentOrder] = useState(null);
+  const { orderId } = useParams();
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      let response = await axios.get(`/api/orders/${orderId}?expand/products`);
+      setCurrentOrder(response.data);
+    };
+    fetchOrders();
+  }, [orderId]);
+  let cartQuantity = 0;
+  {
+    cart &&
+      cart.forEach((item) => {
+        cartQuantity += item.quantity;
+      });
+  }
   return (
     <>
-      <Header />
+      <Header cart={cart} />
       <link rel="icon" type="image/svg+xml" href="tracking-favicon.png" />
       <title>Tracking</title>
       <div className="header">
@@ -34,7 +56,7 @@ export default function Tracking() {
 
           <Link className="cart-link header-link" to="/checkout">
             <img className="cart-icon" src={cartIcon} />
-            <div className="cart-quantity">3</div>
+            <div className="cart-quantity">{cartQuantity}</div>
             <div className="cart-text">Cart</div>
           </Link>
         </div>
@@ -46,23 +68,44 @@ export default function Tracking() {
             View all orders
           </Link>
 
-          <div className="delivery-date">Arriving on Monday, June 13</div>
+          {currentOrder &&
+            currentOrder.products.map((item) => {
+              if (products.length === 0) {
+                return <p>Loading the Products....</p>;
+              }
+              const foundItem = products.find(
+                (product) => product.id === item.productId
+              );
 
-          <div className="product-info">
-            Black and Gray Athletic Cotton Socks - 6 Pairs
-          </div>
+              return (
+                foundItem && (
+                  <Fragment key={item.productId}>
+                    <div className="delivery-date">
+                      Arriving on
+                      {dayjs(item.estimatedDeliveryTimeMs).format("MMMM, D")}
+                    </div>
 
-          <div className="product-info">Quantity: 1</div>
+                    <div className="product-info">{foundItem.name}</div>
 
-          <img
-            className="product-image"
-            src="images/products/athletic-cotton-socks-6-pairs.jpg"
-          />
+                    <div className="product-info">
+                      Quantity: {item.quantity}
+                    </div>
 
+                    <img className="product-image" src={foundItem.image} />
+                  </Fragment>
+                )
+              );
+            })}
+          {deliveryTimeCalculations(
+            currentOrder.estimatedDeliveryTimeMs,
+            currentOrder.orderTimeMs
+          )}
           <div className="progress-labels-container">
             <div className="progress-label">Preparing</div>
             <div className="progress-label current-status">Shipped</div>
-            <div className="progress-label">Delivered</div>
+            <div style={{ width: `$` }} className="progress-label">
+              Delivered
+            </div>
           </div>
 
           <div className="progress-bar-container">

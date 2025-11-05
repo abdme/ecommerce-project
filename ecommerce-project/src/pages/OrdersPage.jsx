@@ -3,12 +3,13 @@ import "./OrdersPage.css";
 import axios from "axios";
 import dayjs from "dayjs";
 import { useState, useEffect, Fragment } from "react";
+import { Link } from "react-router";
 import { formatCurrency } from "../utils/money";
 import logoWhite from "../assets/images/logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
 import buyAgain from "../assets/images/icons/buy-again.png";
-export default function Orders({ cart, products }) {
+export default function Orders({ cart }) {
   const [orders, setOrders] = useState(null);
   useEffect(() => {
     const fetchOrders = async () => {
@@ -106,11 +107,13 @@ export default function Orders({ cart, products }) {
                           </div>
 
                           <div className="product-actions">
-                            <a href="/tracking">
+                            <Link
+                              to={`/tracking/${order.id}/${orderProduct.productId}`}
+                            >
                               <button className="track-package-button button-secondary">
                                 Track package
                               </button>
-                            </a>
+                            </Link>
                           </div>
                         </Fragment>
                       );
