@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import "./CheckoutPage.css";
 import { formatCurrency } from "../../../src/utils/money";
-export default function CheckoutPage({ cart, products }) {
+export default function CheckoutPage({ cart, products, fetchCart }) {
   const [deliveryOption, setDeliveryOption] = useState("");
   const [paymentSummary, setPaymentSummary] = useState(null);
   useEffect(() => {
@@ -20,7 +20,7 @@ export default function CheckoutPage({ cart, products }) {
       setPaymentSummary(response.data);
     };
     fetchPaymentSummary();
-  }, []);
+  }, [cart]);
   function deliveryPrice(amountCents) {
     let price = "FREE SHIPPING";
     if (amountCents != 0) {
@@ -91,14 +91,27 @@ export default function CheckoutPage({ cart, products }) {
                           Choose a delivery option:
                         </div>
                         {deliveryOption.map((option) => {
+                          const updateDeliveryOption = async () => {
+                            await axios.put(
+                              `/api/cart-items/${item.productId}`,
+                              {
+                                deliveryOptionId: option.id,
+                              }
+                            );
+                            fetchCart();
+                          };
                           return (
-                            <div key={option.id} className="delivery-option">
+                            <div
+                              key={option.id}
+                              className="delivery-option"
+                              onClick={updateDeliveryOption}
+                            >
                               <input
                                 type="radio"
-                                readOnly
                                 checked={option.id === item.deliveryOptionId}
                                 className="delivery-option-input"
-                                name={`delivery-option-${currentProduct.id}`}
+                                name={`delivery-option-${item.productId}`}
+                                onChange={() => {}}
                               />
                               <div>
                                 <div className="delivery-option-date">

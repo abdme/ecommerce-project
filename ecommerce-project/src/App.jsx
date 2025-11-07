@@ -34,7 +34,9 @@ function App() {
       ></Route>
       <Route
         path="checkout"
-        element={<CheckoutPage cart={cart} products={products} />}
+        element={
+          <CheckoutPage cart={cart} products={products} fetchCart={fetchCart} />
+        }
       />
       <Route
         path="orders"
