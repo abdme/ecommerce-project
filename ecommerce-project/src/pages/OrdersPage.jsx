@@ -9,7 +9,7 @@ import logoWhite from "../assets/images/logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
 import buyAgain from "../assets/images/icons/buy-again.png";
-export default function Orders({ cart }) {
+export default function Orders({ cart, fetchCart }) {
   const [orders, setOrders] = useState(null);
   useEffect(() => {
     const fetchOrders = async () => {
@@ -17,7 +17,16 @@ export default function Orders({ cart }) {
       setOrders(response.data);
     };
     fetchOrders();
-  });
+  }, []);
+
+  let cartQuantity = 0;
+  {
+    cart &&
+      cart.forEach((item) => {
+        cartQuantity += item.quantity;
+      });
+  }
+
   return (
     <>
       <Header cart={cart} />
@@ -46,7 +55,7 @@ export default function Orders({ cart }) {
 
           <a className="cart-link header-link" href="/checkout">
             <img className="cart-icon" src={cartIcon} />
-            <div className="cart-quantity">3</div>
+            <div className="cart-quantity">{cartQuantity}</div>
             <div className="cart-text">Cart</div>
           </a>
         </div>
@@ -79,6 +88,13 @@ export default function Orders({ cart }) {
                   </div>
                   <div className="order-details-grid">
                     {order.products.map((orderProduct) => {
+                      const addToCart = async () => {
+                        await axios.post("/api/cart-items", {
+                          productId: orderProduct.productId,
+                          quantity: 1,
+                        });
+                        await fetchCart();
+                      };
                       return (
                         <Fragment key={orderProduct.productId}>
                           <div className="product-image-container">
@@ -100,7 +116,12 @@ export default function Orders({ cart }) {
                             </div>
                             <button className="buy-again-button button-primary">
                               <img className="buy-again-icon" src={buyAgain} />
-                              <span className="buy-again-message">
+                              <span
+                                className="buy-again-message"
+                                onClick={() => {
+                                  addToCart();
+                                }}
+                              >
                                 Add to Cart
                               </span>
                             </button>

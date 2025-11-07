@@ -24,6 +24,7 @@ function App() {
     fetchProducts();
     fetchCart();
   }, []);
+  window.axios = axios;
   return (
     <Routes>
       <Route
@@ -40,7 +41,9 @@ function App() {
       />
       <Route
         path="orders"
-        element={<Orders cart={cart} products={products} />}
+        element={
+          <Orders cart={cart} products={products} fetchCart={fetchCart} />
+        }
       />
       <Route
         path="tracking/:orderId/:productId"

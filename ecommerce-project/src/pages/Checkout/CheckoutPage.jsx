@@ -3,6 +3,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import "./CheckoutPage.css";
+import { Navigate } from "react-router";
 import { formatCurrency } from "../../../src/utils/money";
 export default function CheckoutPage({ cart, products, fetchCart }) {
   const [deliveryOption, setDeliveryOption] = useState("");
@@ -28,6 +29,12 @@ export default function CheckoutPage({ cart, products, fetchCart }) {
     }
     return price;
   }
+
+  const placeOrder = async () => {
+    await axios.post("/api/orders");
+    await fetchCart();
+    Navigate("/orders");
+  };
 
   return (
     <>
@@ -180,7 +187,12 @@ export default function CheckoutPage({ cart, products, fetchCart }) {
                 </div>
               </div>
 
-              <button className="place-order-button button-primary">
+              <button
+                className="place-order-button button-primary"
+                onClick={() => {
+                  placeOrder();
+                }}
+              >
                 Place your order
               </button>
             </div>
