@@ -45,10 +45,10 @@ export default function CheckoutPage({ cart, products, fetchCart }) {
                   return option.id === item.deliveryOptionId;
                 });
                 let currentProduct = [];
-                function deleteItem() {
-                  axios.delete(`/api/cart-items/${item.productId}`);
+                const deleteItem = async () => {
+                  await axios.delete(`/api/cart-items/${item.productId}`);
                   fetchCart();
-                }
+                };
                 return (
                   <div key={item.productId} className="cart-item-container">
                     {products.forEach((product) => {
