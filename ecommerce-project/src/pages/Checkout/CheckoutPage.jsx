@@ -28,6 +28,7 @@ export default function CheckoutPage({ cart, products, fetchCart }) {
     }
     return price;
   }
+
   return (
     <>
       <title>Checkout</title>
@@ -44,6 +45,10 @@ export default function CheckoutPage({ cart, products, fetchCart }) {
                   return option.id === item.deliveryOptionId;
                 });
                 let currentProduct = [];
+                function deleteItem() {
+                  axios.delete(`/api/cart-items/${item.productId}`);
+                  fetchCart();
+                }
                 return (
                   <div key={item.productId} className="cart-item-container">
                     {products.forEach((product) => {
@@ -80,7 +85,12 @@ export default function CheckoutPage({ cart, products, fetchCart }) {
                           <span className="update-quantity-link link-primary">
                             Update
                           </span>
-                          <span className="delete-quantity-link link-primary">
+                          <span
+                            className="delete-quantity-link link-primary"
+                            onClick={() => {
+                              deleteItem();
+                            }}
+                          >
                             Delete
                           </span>
                         </div>
