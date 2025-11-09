@@ -1,3 +1,4 @@
+import { DeliveryOptions } from "./DeliveryOptions";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { formatCurrency } from "../../utils/money";
@@ -6,6 +7,8 @@ export function CartProduct({
   item,
   selectedDeliveryOption,
   deleteItem,
+  fetchCart,
+  deliveryOption,
 }) {
   const [updateBtn, setUpdateBtn] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -73,6 +76,11 @@ export function CartProduct({
           </div>
         </div>
       </div>
+      <DeliveryOptions
+        fetchCart={fetchCart}
+        item={item}
+        deliveryOption={deliveryOption}
+      />
     </div>
   );
 }
