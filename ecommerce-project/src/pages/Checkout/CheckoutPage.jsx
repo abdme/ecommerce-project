@@ -1,6 +1,5 @@
 import CheckoutHeader from "./CheckoutHeader";
 import axios from "axios";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import "./CheckoutPage.css";
 import { CartProduct } from "./cartProduct";

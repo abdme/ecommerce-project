@@ -1,5 +1,5 @@
 import "./HomePage.css";
-import Header from "../components/Header";
+import Header from "../components/header";
 import { Product } from "./Product";
 // import { products } from "../../starting-code/data/products";
 

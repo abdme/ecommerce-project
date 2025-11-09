@@ -2,6 +2,7 @@ import { DeliveryOptions } from "./DeliveryOptions";
 import { useState } from "react";
 import dayjs from "dayjs";
 import { formatCurrency } from "../../utils/money";
+import axios from "axios";
 export function CartProduct({
   products,
   item,
@@ -57,11 +58,29 @@ export function CartProduct({
               size="2"
               value={quantity}
               style={{ display: updateBtn ? "inline" : "none" }}
-              onKeyDown={() => {}}
-              onChange={(e) => {
+              onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  setQuantity(parseInt(e.target.value));
+                  let qVal = parseInt(e.target.value);
+                  if (qVal != 0) {
+                    async function putUpdate() {
+                      await axios.put(`/api/cart-items/${item.productId}`, {
+                        quantity: qVal,
+                      });
+                    }
+                    putUpdate();
+                    setUpdateBtn(false);
+                    fetchCart();
+                  }
                 }
+                if (e.key === "Escape") {
+                  setUpdateBtn(false);
+                  fetchCart();
+                }
+              }}
+              onChange={(e) => {
+                setQuantity(
+                  e.target.value === "" ? 0 : parseInt(e.target.value)
+                );
               }}
             />
             <span

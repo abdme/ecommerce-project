@@ -1,4 +1,4 @@
-import Header from "../components/Header";
+import Header from "../components/header";
 import { Link } from "react-router";
 import { useState, useEffect, Fragment } from "react";
 import axios from "axios";
@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import "./TrackingPage.css";
 import logoWhite from "../assets/images/logo-white.png";
 import mobileLogoWhite from "../assets/images/mobile-logo-white.png";
-import { deliveryTimeCalculations } from "../utils/deliveryTimeCalculate";
 import { useParams } from "react-router";
 import searchIcon from "../assets/images/icons/search-icon.png";
 import cartIcon from "../assets/images/icons/cart-icon.png";
