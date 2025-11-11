@@ -1,9 +1,12 @@
 import "./HomePage.css";
 import Header from "../components/header";
 import { Product } from "./Product";
+import { useSearchParams } from "react-router";
 // import { products } from "../../starting-code/data/products";
 
 export default function HomePage({ cart, products, fetchCart }) {
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search");
   return (
     <>
       <Header cart={cart} />
@@ -18,6 +21,7 @@ export default function HomePage({ cart, products, fetchCart }) {
                 products={products}
                 fetchCart={fetchCart}
                 product={product}
+                search={search}
               />
             );
           })}
